@@ -1,0 +1,465 @@
+<title>Modu Mascot</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;700&family=Sora:wght@600&family=Noto+Sans+Thai:wght@400;500;700&display=swap">
+<style>
+/* Layout: one 1120px column of bands. The character always stands on a Cloud panel; its knockout ring follows the panel color. */
+:root {
+  --lime: #B6F23A; --indigo: #5B6CFF; --ink: #0E1116; --white: #FFFFFF;
+  --bg: #FFFFFF; --surface: #F4F6F8; --text: #0E1116; --muted: #4A5160; --border: #DDE1E8;
+  --link: #3A47C9; --chip-bg: #E4E7FF; --chip-fg: #3A47C9; --good: #4E7208; --bad: #B4302A;
+  --modu-limb: #0E1116; --modu-ground: #F4F6F8;
+  --display: "Space Grotesk", "Noto Sans Thai", system-ui, sans-serif;
+  --sans: "Inter", "Noto Sans Thai", system-ui, sans-serif;
+  --wordmark: "Sora", "Space Grotesk", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1116; --surface: #171B22; --text: #F4F6F8; --muted: #C9CEDA; --border: #4A5160;
+    --link: #8F9BFF; --chip-bg: #232A5E; --chip-fg: #C9CEFF; --good: #B6F23A; --bad: #FF8A7E;
+    --modu-limb: #F4F6F8; --modu-ground: #171B22; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1116; --surface: #171B22; --text: #F4F6F8; --muted: #C9CEDA; --border: #4A5160;
+  --link: #8F9BFF; --chip-bg: #232A5E; --chip-fg: #C9CEFF; --good: #B6F23A; --bad: #FF8A7E;
+  --modu-limb: #F4F6F8; --modu-ground: #171B22; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font: 400 16px/1.6 var(--sans); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 64px; border-top: 1px solid var(--border); }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h2 { font-size: 32px; line-height: 38px; font-weight: 500; letter-spacing: -0.02em; }
+h3 { font-size: 18px; line-height: 24px; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 500 13px/18px var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.sec-head { display: grid; gap: 8px; max-width: 640px; margin-bottom: 32px; }
+.sec-head p:not(.eyebrow) { color: var(--muted); }
+.panel { background: var(--surface); border-radius: 20px; }
+.modu-slot svg { display: block; width: 100%; height: auto; }
+
+/* hero */
+.hero { padding-block: 48px 64px; }
+.hero-grid { display: grid; gap: 32px; align-items: center; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 56px; } }
+.hero h1 { font-size: clamp(56px, 11vw, 104px); line-height: 0.95; font-weight: 700; letter-spacing: -0.04em; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.hero h1 .th { font-size: 0.36em; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+.hero-copy { display: grid; gap: 20px; min-width: 0; }
+.lede { font-size: 18px; line-height: 28px; max-width: 34em; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 8px 0 0; }
+.facts div { background: var(--bg); padding: 12px 16px; }
+.facts dt { font-size: 13px; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 500; }
+.hero-stage { position: relative; padding: 32px 40px 24px; }
+.hero-stage .modu-slot { max-width: 400px; margin: 0 auto; }
+.hero-stage .bob { animation: bob 3.4s ease-in-out infinite; }
+.hello { position: absolute; left: 20px; top: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; padding: 8px 14px; font-weight: 500; font-size: 15px; }
+
+/* construction */
+.build { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .build { grid-template-columns: 1fr 1fr; } }
+.equation { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 32px 24px; flex-wrap: wrap;
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px; background-position: center; }
+.equation .logo { width: 120px; }
+.equation .op { font: 500 32px var(--display); color: var(--muted); }
+.equation .modu-slot { width: 190px; }
+.specs { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
+.specs li { display: grid; grid-template-columns: 112px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.specs b { font-family: var(--display); font-weight: 700; }
+.specs span { color: var(--muted); min-width: 0; }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; border: 1px solid var(--border); }
+
+/* expressions */
+.expr-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.expr { display: grid; gap: 4px; padding: 16px 16px 20px; align-content: start; }
+.expr .modu-slot { width: 150px; margin: 0 auto 8px; }
+.expr .name { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.expr .name code { font: 500 12px/18px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--chip-fg); background: var(--chip-bg); padding: 1px 8px; border-radius: 999px; }
+.expr p { font-size: 14px; line-height: 20px; color: var(--muted); }
+
+/* playground */
+.play { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .play { grid-template-columns: 1fr 340px; } }
+.stage { border-radius: 24px; display: grid; place-items: center; padding: 32px; min-height: 360px; border: 1px solid var(--border); transition: background-color .25s; }
+.stage .modu-slot { width: min(320px, 100%); }
+.controls { display: grid; gap: 20px; align-content: start; }
+.controls fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+.controls legend { font-size: 14px; font-weight: 500; margin-bottom: 8px; padding: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: 500 14px/20px var(--sans); color: var(--text); background: var(--bg); border: 1px solid var(--border); padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+.chip:hover { border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+.chip:focus-visible, .btn:focus-visible { outline: 3px solid var(--indigo); outline-offset: 2px; }
+.btn { font: 500 14px/20px var(--sans); background: var(--lime); color: var(--ink); border: 0; border-radius: 999px; padding: 12px 24px; cursor: pointer; justify-self: start; }
+.btn:hover { filter: brightness(0.95); }
+.copy-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.copy-row output { font-size: 14px; color: var(--muted); }
+#svgFallback { width: 100%; height: 90px; font: 12px ui-monospace, monospace; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+
+/* product */
+.product { display: grid; gap: 24px; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .product { grid-template-columns: 1.1fr 1fr; } }
+.chat { background: var(--bg); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
+.chat-head { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.chat-head b { display: block; font-family: var(--display); }
+.chat-head small { color: var(--muted); font-size: 13px; }
+.av { width: 40px; height: 40px; flex: none; border-radius: 12px; background: var(--surface); padding: 3px; --modu-ground: var(--surface); }
+.chat-body { display: grid; gap: 14px; padding: 20px; }
+.msg { display: flex; gap: 10px; align-items: flex-end; }
+.msg.user { justify-content: flex-end; }
+.bubble { padding: 10px 14px; border-radius: 16px; max-width: 80%; font-size: 15px; line-height: 22px; min-width: 0; }
+.msg.user .bubble { background: var(--text); color: var(--bg); border-bottom-right-radius: 4px; }
+.msg.bot .bubble { background: var(--surface); border-bottom-left-radius: 4px; }
+.typing { color: var(--muted); }
+.dots i { display: inline-block; width: 5px; height: 5px; margin-left: 3px; border-radius: 50%; background: currentColor; animation: dot 1.2s infinite; }
+.dots i:nth-child(2) { animation-delay: .15s; } .dots i:nth-child(3) { animation-delay: .3s; }
+.states { display: grid; gap: 0; border-top: 1px solid var(--border); }
+.state { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.state .av { width: 48px; height: 48px; }
+.state p { font-size: 14px; line-height: 20px; color: var(--muted); }
+.sizes { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; padding: 24px; margin-top: 24px; }
+.sizes figure { margin: 0; display: grid; gap: 8px; justify-items: center; }
+.size-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.sizes figcaption { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* colorways */
+.ways { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.way { border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: var(--bg); }
+.way .tile { padding: 20px 28px 12px; }
+.way .cap { padding: 12px 16px 16px; display: grid; gap: 2px; }
+.way .cap b { font-family: var(--display); }
+.way .cap span { font-size: 13px; line-height: 18px; color: var(--muted); }
+
+/* voice + rules */
+.two { display: grid; gap: 32px; grid-template-columns: 1fr; }
+@media (min-width: 820px) { .two { grid-template-columns: 1fr 1fr; } }
+.traits { display: grid; gap: 16px; margin: 0; }
+.traits div { display: grid; gap: 2px; }
+.traits dt { font-family: var(--display); font-weight: 700; font-size: 18px; }
+.traits dd { margin: 0; color: var(--muted); }
+.say { display: grid; gap: 12px; }
+.say-row { display: grid; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--surface); }
+.say-row .tag { font-size: 13px; font-weight: 700; }
+.say-row .tag.yes { color: var(--good); } .say-row .tag.no { color: var(--bad); }
+.rules { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+.rule { display: grid; gap: 10px; align-content: start; }
+.rule .tile { border-radius: 16px; padding: 16px 22px; border: 1px solid var(--border); overflow: hidden; }
+.rule .tile .modu-slot { max-width: 130px; margin: 0 auto; }
+.rule p { font-size: 14px; line-height: 20px; }
+.rule .tag { font-weight: 700; }
+.rule .tag.yes { color: var(--good); } .rule .tag.no { color: var(--bad); }
+.stretch svg { transform: scaleX(1.35); }
+footer { padding-block: 40px 56px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+footer code { font-size: 13px; color: var(--text); }
+
+/* motion */
+.modu .modu-eyes { transform-box: fill-box; transform-origin: center; animation: blink 6s infinite; }
+.modu .modu-wave-arm { transform-box: fill-box; transform-origin: 30% 100%; animation: wave 1.8s ease-in-out infinite; }
+.modu .modu-dots circle { animation: dot 1.2s infinite; }
+.modu .modu-dots circle:nth-child(2) { animation-delay: .15s; } .modu .modu-dots circle:nth-child(3) { animation-delay: .3s; }
+.modu--think .modu-antenna, .modu--focus .modu-antenna { transform-box: fill-box; transform-origin: center; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes wave { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(16deg); } }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes dot { 0%, 100% { opacity: .3; } 40% { opacity: 1; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.84); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Moduro mascot · v1</p>
+      <h1>Modu <span class="th">โมดู</span></h1>
+      <p class="lede">Modu คือผู้ช่วยประจำแบรนด์ Moduro ตัวเป็นบล็อกโมดูลสี Volt lime มีบล็อกสีครามเกาะมุมบนขวาแบบเดียวกับโลโก้ Step Up ใช้เป็นหน้าตาของผู้ช่วย AI ในผลิตภัณฑ์ ในแชต และบนโซเชียล</p>
+      <dl class="facts">
+        <div><dt>บทบาท</dt><dd>ผู้ช่วยต่อโมดูล</dd></div>
+        <div><dt>นิสัย</dt><dd>ใจดี พูดตรง ลงมือทำ</dd></div>
+        <div><dt>ความสูง</dt><dd>1 โมดูล พอดี</dd></div>
+        <div><dt>สีประจำตัว</dt><dd><span class="swatch" style="background:var(--lime)"></span>Volt lime</dd></div>
+      </dl>
+    </div>
+    <div class="panel hero-stage">
+      <span class="hello">สวัสดี ให้ช่วยต่ออะไรดี</span>
+      <div class="modu-slot bob" data-modu data-expr="wink" data-pose="wave"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Construction</p>
+      <h2>สร้างจากโลโก้ ไม่ได้วาดใหม่</h2>
+      <p>ทุกชิ้นของ Modu มาจากบล็อกในโลโก้ Step Up ใช้กฎเดียวกัน คือมุมโค้ง 25% ของขนาดบล็อก และบล็อกที่ซ้อนกันมีวงตัดสีพื้นคั่น</p>
+    </div>
+    <div class="build">
+      <div class="panel equation">
+        <svg class="logo" viewBox="-5 -5 110 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="โลโก้ Moduro Step Up">
+          <rect x="0" y="60" width="40" height="40" rx="10" style="fill:var(--modu-limb)"/>
+          <rect x="25" y="25" width="50" height="50" rx="13" style="fill:var(--modu-ground)"/>
+          <rect x="30" y="30" width="40" height="40" rx="10" fill="#5B6CFF"/>
+          <rect x="55" y="-5" width="50" height="50" rx="13" style="fill:var(--modu-ground)"/>
+          <rect x="60" y="0" width="40" height="40" rx="10" fill="#B6F23A"/>
+        </svg>
+        <span class="op" aria-hidden="true">→</span>
+        <div class="modu-slot" data-modu data-expr="happy"></div>
+      </div>
+      <ul class="specs">
+        <li><b>ตัว</b><span><span class="swatch" style="background:#B6F23A"></span>บล็อกบนสุดของโลโก้ สี Volt lime 120 × 120 มุมโค้ง 30 (25%)</span></li>
+        <li><b>เสาสัญญาณ</b><span><span class="swatch" style="background:#5B6CFF"></span>บล็อกกลางของโลโก้ สี Moduro indigo 44 × 44 วางทับมุมบนขวาของตัว มีวงตัดสีพื้น 5 หน่วยคั่น ขยับเมื่อ Modu กำลังทำงาน</span></li>
+        <li><b>แขนขา</b><span><span class="swatch" style="background:var(--modu-limb)"></span>บล็อกล่างของโลโก้ สี Ink บนพื้นสว่าง และ Cloud บนพื้นมืด วางไว้หลังตัวเสมอ</span></li>
+        <li><b>หน้า</b><span>ตาแคปซูลสี Ink 2 ดวง ห่างกัน 31 หน่วย ปากเป็นเส้นเดียว ไม่มีจมูก ไม่มีแก้ม</span></li>
+        <li><b>ไฟล์ต้นแบบ</b><span>viewBox 200 × 200 ทุกท่าใช้กริดเดียวกัน อวตารครอปที่ 168 × 168</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Expressions</p>
+      <h2>8 อารมณ์ ใช้ตามสถานะงาน</h2>
+      <p>อารมณ์ของ Modu บอกสถานะของระบบ เลือกตามสิ่งที่เกิดขึ้นจริง ไม่ใช่เพื่อความน่ารักอย่างเดียว</p>
+    </div>
+    <div class="expr-grid" id="exprGrid"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Playground</p>
+      <h2>ลองจัดท่าแล้วคัดลอกไปใช้</h2>
+      <p>เลือกอารมณ์ ท่า และพื้นหลัง แล้วกดคัดลอก SVG ไปวางใน Figma หรือโค้ดได้ทันที</p>
+    </div>
+    <div class="play">
+      <div class="stage" id="stage"><div class="modu-slot" id="stageModu"></div></div>
+      <div class="controls">
+        <fieldset><legend>อารมณ์</legend><div class="chips" id="cExpr"></div></fieldset>
+        <fieldset><legend>ท่า</legend><div class="chips" id="cPose"></div></fieldset>
+        <fieldset><legend>พื้นหลัง</legend><div class="chips" id="cWay"></div></fieldset>
+        <div class="copy-row">
+          <button class="btn" id="copyBtn" type="button">คัดลอก SVG</button>
+          <output id="copyMsg" aria-live="polite"></output>
+        </div>
+        <textarea id="svgFallback" readonly hidden aria-label="โค้ด SVG"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">In the product</p>
+      <h2>หน้าตาของผู้ช่วย AI</h2>
+      <p>ในแชตใช้เฉพาะส่วนหัว (อวตาร) ไม่มีแขนขา สีหน้าเปลี่ยนตามสถานะของคำตอบ ผู้ใช้จึงรู้ว่า Modu กำลังทำอะไรโดยไม่ต้องอ่าน</p>
+    </div>
+    <div class="product">
+      <div class="chat">
+        <div class="chat-head">
+          <span class="av modu-slot" data-modu data-avatar data-expr="happy"></span>
+          <div><b>Modu</b><small>ผู้ช่วย Moduro · พร้อมช่วย</small></div>
+        </div>
+        <div class="chat-body">
+          <div class="msg user"><div class="bubble">ช่วยเชื่อม LINE OA เข้ากับระบบสต็อกให้หน่อย</div></div>
+          <div class="msg bot"><span class="av modu-slot" data-modu data-avatar data-expr="think"></span><div class="bubble typing">กำลังหาโมดูลที่ต่อกันได้<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div></div>
+          <div class="msg bot"><span class="av modu-slot" data-modu data-avatar data-expr="joy"></span><div class="bubble">เชื่อมเสร็จแล้ว ใช้โมดูล LINE Messaging กับ Stock Sync ยอดสต็อกจะส่งเข้า LINE ทุก 5 นาที</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="states">
+          <div class="state"><span class="av modu-slot" data-modu data-avatar data-expr="happy"></span><div><h3>พร้อม</h3><p>รอคำสั่ง ตากะพริบช้า ๆ ทุก 6 วินาที</p></div></div>
+          <div class="state"><span class="av modu-slot" data-modu data-avatar data-expr="think"></span><div><h3>กำลังคิด</h3><p>เสาสัญญาณกะพริบ จุดสามจุดขยับ ใช้จนกว่าคำตอบแรกจะขึ้น</p></div></div>
+          <div class="state"><span class="av modu-slot" data-modu data-avatar data-expr="joy"></span><div><h3>เสร็จแล้ว</h3><p>แสดงครั้งเดียวตอนงานสำเร็จ แล้วกลับไปหน้า "พร้อม"</p></div></div>
+          <div class="state"><span class="av modu-slot" data-modu data-avatar data-expr="oops"></span><div><h3>ผิดพลาด</h3><p>คู่กับข้อความที่บอกสาเหตุและวิธีแก้เสมอ</p></div></div>
+        </div>
+        <div class="panel sizes" id="sizes"></div>
+        <p class="size-note">ขนาดเป็นพิกเซล ที่ 24 px ลงไปใช้แบบ mini คือตาใหญ่ขึ้นและไม่มีปาก</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Colorways</p>
+      <h2>สีบนพื้นแต่ละแบบ</h2>
+      <p>ใช้ชุดสีเดียวกับกฎของโลโก้ วงตัดรอบเสาสัญญาณเป็นสีพื้นเสมอ</p>
+    </div>
+    <div class="ways" id="ways"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div>
+      <div class="sec-head">
+        <p class="eyebrow">Voice</p>
+        <h2>Modu พูดยังไง</h2>
+        <p>พูดเหมือนเพื่อนร่วมทีมที่เก่งเรื่องเทคนิค Modu ไม่มีเพศ จึงใช้คำลงท้ายกลาง ๆ เช่น "นะ" แทน "ครับ/ค่ะ"</p>
+      </div>
+      <dl class="traits">
+        <div><dt>ช่างต่อ</dt><dd>ชอบหยิบโมดูลมาต่อให้เข้ากับงานของผู้ใช้ บอกเสมอว่าใช้ชิ้นไหน</dd></div>
+        <div><dt>พูดตรง</dt><dd>บอกว่าทำอะไรได้และทำอะไรไม่ได้ ประโยคสั้น ไม่ใช้ศัพท์การตลาด</dd></div>
+        <div><dt>ใจเย็น</dt><dd>เวลามีปัญหา บอกสาเหตุกับขั้นตอนแก้ ไม่โทษผู้ใช้ ไม่ขอโทษยืดยาว</dd></div>
+      </dl>
+    </div>
+    <div class="say">
+      <div class="say-row"><span class="tag yes">พูดแบบนี้</span><p>เชื่อมเสร็จแล้ว สต็อกจะอัปเดตทุก 5 นาที</p></div>
+      <div class="say-row"><span class="tag no">ไม่พูดแบบนี้</span><p>สุดยอดไปเลยยย!!! เสร็จแล้วน้าาา</p></div>
+      <div class="say-row"><span class="tag yes">พูดแบบนี้</span><p>ยังเชื่อมไม่ได้ เพราะ API key หมดอายุ ไปที่ ตั้งค่า &gt; คีย์ แล้วสร้างคีย์ใหม่นะ</p></div>
+      <div class="say-row"><span class="tag no">ไม่พูดแบบนี้</span><p>ขออภัยอย่างสูง เกิดข้อผิดพลาดบางประการ กรุณาลองใหม่ภายหลัง</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Rules</p>
+      <h2>ทำและไม่ทำ</h2>
+    </div>
+    <div class="rules" id="rules"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    ไฟล์ทั้งหมดอยู่ใน repo <code>moduro-mascot</code>: ตัววาด <code>modu.js</code> และ SVG ทุกอารมณ์ในโฟลเดอร์ <code>svg/</code> · ฟอนต์และสีตาม Moduro design system
+  </div>
+</footer>
+
+<script src="modu.js"></script>
+<script>
+(function () {
+  var EXPRS = [
+    { id: 'happy', en: 'Happy', th: 'ยิ้ม', use: 'ค่าเริ่มต้น ใช้ในหน้าแรก ข้อความต้อนรับ และตอนรอคำสั่ง' },
+    { id: 'joy', en: 'Joy', th: 'ดีใจ', pose: 'cheer', use: 'งานเสร็จ ติดตั้งหรือเชื่อมต่อสำเร็จ' },
+    { id: 'think', en: 'Thinking', th: 'กำลังคิด', use: 'ระหว่างประมวลผลหรือค้นหาคำตอบ' },
+    { id: 'focus', en: 'Focus', th: 'ตั้งใจทำงาน', use: 'งานที่ใช้เวลานาน เช่น build, deploy, sync ข้อมูล' },
+    { id: 'surprised', en: 'Surprised', th: 'ว้าว', use: 'ประกาศฟีเจอร์ใหม่ หรือสิ่งที่ผู้ใช้ควรรู้' },
+    { id: 'wink', en: 'Wink', th: 'ขยิบตา', pose: 'wave', use: 'ทิปส์ ทางลัด และข้อความทักทาย' },
+    { id: 'sleepy', en: 'Resting', th: 'พักอยู่', use: 'ออฟไลน์ ไม่มีงาน หรือหน้าว่างที่ยังไม่มีข้อมูล' },
+    { id: 'oops', en: 'Oops', th: 'อุ๊ปส์', use: 'เกิดข้อผิดพลาด ต้องมีข้อความบอกวิธีแก้อยู่ข้าง ๆ' }
+  ];
+  var POSES = [{ id: 'idle', th: 'ยืน' }, { id: 'wave', th: 'โบกมือ' }, { id: 'cheer', th: 'ชูแขน' }];
+  var WAYS = [
+    { id: 'light', th: 'พื้นขาว', note: 'ตัว Lime · แขนขา Ink · เสา Indigo' },
+    { id: 'dark', th: 'พื้น Ink', note: 'แขนขาเปลี่ยนเป็น Cloud' },
+    { id: 'indigo', th: 'พื้น Indigo', note: 'เสาสัญญาณเปลี่ยนเป็นขาว' },
+    { id: 'lime', th: 'พื้น Lime', note: 'ตัวเปลี่ยนเป็นขาว' },
+    { id: 'mono', th: 'สีเดียว', note: 'ใช้กับงานพิมพ์สีเดียว ตรายาง' }
+  ];
+  var P = Modu.palettes;
+
+  function fill(el, opts) { el.innerHTML = Modu.svg(opts); }
+
+  // data-modu slots follow the page theme through CSS variables
+  document.querySelectorAll('[data-modu]').forEach(function (el) {
+    fill(el, { expression: el.dataset.expr || 'happy', pose: el.dataset.pose || 'idle',
+      avatar: el.hasAttribute('data-avatar'), cssVars: true, shadow: !el.hasAttribute('data-avatar') });
+  });
+
+  // expressions
+  var grid = document.getElementById('exprGrid');
+  EXPRS.forEach(function (e) {
+    var card = document.createElement('article');
+    card.className = 'panel expr';
+    card.innerHTML = '<div class="modu-slot"></div><div class="name"><h3>' + e.th + '</h3><code>' + e.id + '</code></div><p>' + e.use + '</p>';
+    fill(card.querySelector('.modu-slot'), { expression: e.id, pose: e.pose || 'idle', cssVars: true, title: 'Modu ' + e.en });
+    grid.appendChild(card);
+  });
+
+  // sizes
+  var sizes = document.getElementById('sizes');
+  [96, 64, 40, 24, 16].forEach(function (px) {
+    var f = document.createElement('figure');
+    var slot = document.createElement('div');
+    slot.className = 'modu-slot';
+    slot.style.width = px + 'px';
+    fill(slot, { avatar: true, cssVars: true, mini: px <= 24 });
+    f.appendChild(slot);
+    f.insertAdjacentHTML('beforeend', '<figcaption>' + px + '</figcaption>');
+    sizes.appendChild(f);
+  });
+
+  // colorways
+  var ways = document.getElementById('ways');
+  WAYS.forEach(function (w) {
+    var d = document.createElement('div');
+    d.className = 'way';
+    d.innerHTML = '<div class="tile modu-slot" style="background:' + P[w.id].ground + '"></div><div class="cap"><b>' + w.th + '</b><span>' + w.note + '</span></div>';
+    fill(d.querySelector('.modu-slot'), { palette: w.id, expression: 'happy' });
+    ways.appendChild(d);
+  });
+
+  // rules
+  var RULES = [
+    { ok: true, txt: 'วงตัดรอบเสาสัญญาณใช้สีเดียวกับพื้นหลังเสมอ', opts: { palette: 'light', colors: { ground: '#F4F6F8' } }, bg: '#F4F6F8' },
+    { ok: true, txt: 'บนพื้น Lime เปลี่ยนตัวเป็นสีขาว', opts: { palette: 'lime' }, bg: P.lime.ground },
+    { ok: false, txt: 'ห้ามยืดหรือบีบสัดส่วน', opts: { palette: 'light', colors: { ground: '#F4F6F8' } }, bg: '#F4F6F8', cls: 'stretch' },
+    { ok: false, txt: 'ห้ามเปลี่ยนสีตัวเป็นสีอื่น', opts: { palette: 'light', colors: { ground: '#F4F6F8', body: '#5B6CFF', antenna: '#B6F23A' } }, bg: '#F4F6F8' },
+    { ok: false, txt: 'ห้ามตัดเสาสัญญาณออก เพราะเป็นส่วนที่ผูกกับโลโก้', opts: { palette: 'light', antenna: false }, bg: '#F4F6F8' },
+    { ok: false, txt: 'ห้ามวางตัว Lime บนพื้น Lime', opts: { palette: 'light', colors: { ground: '#B6F23A' } }, bg: '#B6F23A' }
+  ];
+  var rules = document.getElementById('rules');
+  RULES.forEach(function (r) {
+    var d = document.createElement('div');
+    d.className = 'rule';
+    d.innerHTML = '<div class="tile" style="background:' + r.bg + '"><div class="modu-slot ' + (r.cls || '') + '"></div></div><p><span class="tag ' + (r.ok ? 'yes' : 'no') + '">' + (r.ok ? 'ทำ' : 'ไม่ทำ') + '</span> ' + r.txt + '</p>';
+    fill(d.querySelector('.modu-slot'), r.opts);
+    rules.appendChild(d);
+  });
+
+  // playground
+  var state = { expression: 'happy', pose: 'wave', palette: 'light' };
+  try { var saved = JSON.parse(localStorage.getItem('modu-play') || 'null'); if (saved) state = Object.assign(state, saved); } catch (e) {}
+  var stage = document.getElementById('stage');
+  var stageModu = document.getElementById('stageModu');
+  function chips(id, items, key, label) {
+    var box = document.getElementById(id);
+    items.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.textContent = it[label]; b.dataset.v = it.id;
+      b.addEventListener('click', function () { state[key] = it.id; render(); });
+      box.appendChild(b);
+    });
+  }
+  chips('cExpr', EXPRS, 'expression', 'th');
+  chips('cPose', POSES, 'pose', 'th');
+  chips('cWay', WAYS, 'palette', 'th');
+  function current() { return Modu.svg({ expression: state.expression, pose: state.pose, palette: state.palette, title: 'Modu' }); }
+  function render() {
+    stageModu.innerHTML = current();
+    stage.style.backgroundColor = P[state.palette].ground;
+    document.querySelectorAll('#cExpr .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === state.expression); });
+    document.querySelectorAll('#cPose .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === state.pose); });
+    document.querySelectorAll('#cWay .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.v === state.palette); });
+    document.getElementById('copyMsg').textContent = 'modu-' + state.expression + '-' + state.pose + '-' + state.palette + '.svg';
+    document.getElementById('svgFallback').hidden = true;
+    try { localStorage.setItem('modu-play', JSON.stringify(state)); } catch (e) {}
+  }
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var code = current();
+    var msg = document.getElementById('copyMsg');
+    var fallback = function () {
+      var ta = document.getElementById('svgFallback');
+      ta.value = code; ta.hidden = false; ta.focus(); ta.select();
+      msg.textContent = 'เลือกโค้ดไว้ให้แล้ว กด Ctrl+C / ⌘C เพื่อคัดลอก';
+    };
+    try {
+      navigator.clipboard.writeText(code).then(function () { msg.textContent = 'คัดลอกแล้ว'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+  render();
+})();
+</script>
