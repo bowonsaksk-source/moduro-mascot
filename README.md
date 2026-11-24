@@ -56,3 +56,12 @@ Modu.svg({ expression: 'happy', cssVars: true });             // สีตาม
 - `concepts/index.html`: หน้าเปรียบเทียบ 4 แบบ
 - `concepts/concepts.js`: `ModuConcepts.draw('visor' | 'mochi' | 'sticker' | 'pixel', { expression, avatar })`
 - `concepts/svg/`: ตัวเต็มและอวตาร 4 อารมณ์ของแต่ละแบบ สร้างใหม่ด้วย `node scripts/export-concepts.js`
+
+## รอบที่ 3: Modu Visor แบบ 3D
+
+`visor3d/` คือแบบ Visor ที่ปั้นใหม่เป็นโมเดล 3D (three.js) มี 3 ทรง: **Classic** (ยืนสองขา), **Hover** (ลอยตัว มีวงแหวนไฟ), **Hoodie** (ใส่ฮู้ดสีคราม) และสีหน้าบนจอ 8 แบบ
+
+- `visor3d/index.html`: หน้าแสดงโมเดล 3D แบบหมุนได้ พร้อมภาพนิ่งทุกแบบ
+- `visor3d/modu3d.js`: ตัวโมเดล `createViewer(canvas, { variant, expression })` และ `viewer.render({ variant, expression, crop, width, height })` ที่คืนค่าเป็น PNG
+- `visor3d/renders/`: PNG พื้นใส ตัวเต็ม 1024 px (`classic.png`, `hover.png`, `hoodie.png`) และครอปหัว 512 px ทุกสีหน้า (`<ทรง>-<สีหน้า>.png`)
+- เรนเดอร์ใหม่: `npm install` แล้ว `npm run render`

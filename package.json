@@ -1,0 +1,12 @@
+{
+  "name": "moduro-mascot",
+  "private": true,
+  "description": "Modu, the Moduro mascot: character files and render scripts.",
+  "scripts": {
+    "render": "node scripts/render-visor3d.js",
+    "export:svg": "node scripts/export.js && node scripts/export-concepts.js"
+  },
+  "devDependencies": {
+    "three": "0.160.0"
+  }
+}
