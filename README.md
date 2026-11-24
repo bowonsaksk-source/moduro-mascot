@@ -48,3 +48,11 @@ Modu.svg({ expression: 'happy', cssVars: true });             // สีตาม
 - ห้ามยืดสัดส่วน ห้ามเปลี่ยนสีตัว ห้ามตัดเสาสัญญาณออก
 - อารมณ์ `oops` ต้องมาคู่กับข้อความที่บอกสาเหตุและวิธีแก้
 - Modu ไม่มีเพศ ใช้คำลงท้ายกลาง ๆ เช่น "นะ"
+
+## รอบที่ 2: 4 แนวทางจาก Pinterest
+
+`concepts/` เก็บแบบรอบที่ 2 ที่วาดจากการดูพินมาสคอตบน Pinterest: **A Visor** (หุ่นยนต์ของเล่นหน้าจอเรืองแสง), **B Mochi** (ก้อนนุ่มตาโต), **C Sticker** (การ์ตูนเส้นหนาย้อนยุค), **D Pixel** (เพื่อนพิกเซล 8 บิต)
+
+- `concepts/index.html`: หน้าเปรียบเทียบ 4 แบบ
+- `concepts/concepts.js`: `ModuConcepts.draw('visor' | 'mochi' | 'sticker' | 'pixel', { expression, avatar })`
+- `concepts/svg/`: ตัวเต็มและอวตาร 4 อารมณ์ของแต่ละแบบ สร้างใหม่ด้วย `node scripts/export-concepts.js`
